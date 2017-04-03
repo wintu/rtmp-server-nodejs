@@ -1,4 +1,9 @@
-# Node-Media-Server
+# RTMP-Server
+
+[![npm](https://img.shields.io/npm/v/rtmp-server.svg)](https://npmjs.org/package/rtmp-server)
+[![npm](https://img.shields.io/npm/dm/rtmp-server.svg)](https://npmjs.org/package/rtmp-server)
+[![npm](https://img.shields.io/npm/l/rtmp-server.svg)](LICENSE)
+
 A Node.js implementation of RTMP Server 
  - Supports only RTMP protocol.
  - Supports only H.264 video and AAC audio.
