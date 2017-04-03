@@ -28,16 +28,16 @@ rtmpServer.on('client', client => {
   //  console.log(command.cmd, command);
   //});
 
-  client.on('connect', app => {
-     console.log('connect', app);
+  client.on('connect', () => {
+     console.log('connect', client.app);
   });
   
-  client.on('play', (stream, app) => {
-    console.log('PLAY', stream, app);
+  client.on('play', ({ streamName }) => {
+    console.log('PLAY', streamName);
   });
   
-  client.on('publish', (stream, app) => {
-    console.log('PUBLISH', stream, app);
+  client.on('publish', ({ streamName }) => {
+    console.log('PUBLISH', streamName);
   });
   
   client.on('stop', () => {

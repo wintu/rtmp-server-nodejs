@@ -236,16 +236,17 @@ class NMRtmpConn extends EventEmitter {
 
     switch (cmd.cmd) {
       case 'connect': {
+        // console.log('rtmp connect app: ' + this.connectCmdObj.app);
+
         this.connectCmdObj = cmd.cmdObj;
+        this.app = this.connectCmdObj.app;
         this.objectEncoding = cmd.cmdObj.objectEncoding != null ? cmd.cmdObj.objectEncoding : 0;
         this.windowACK(5000000);
         this.setPeerBandwidth(5000000, 2);
         this.outChunkSize = 4096;
         this.setChunkSize(this.outChunkSize);
 
-        this.emit('connect', this.connectCmdObj.app, cmd);
-        // console.log('rtmp connect app: ' + this.connectCmdObj.app);
-
+        this.emit('connect', cmd);
         this.respondConnect();
         break;
       }
@@ -253,12 +254,14 @@ class NMRtmpConn extends EventEmitter {
         this.respondCreateStream(cmd);
         break;
       case 'play': {
-        this.emit('play', cmd.streamName, this.connectCmdObj.app, cmd);
         // console.log('rtmp play stream: ' + cmd.streamName);
-        this.respondPlay();
 
         const streamName = this.connectCmdObj.app + '/' + cmd.streamName;
         this.playStreamName = streamName;
+
+        this.emit('play', cmd);
+        this.respondPlay();
+
 
         if (!this.producers[streamName]) {
           // console.info("[rtmp streamPlay]  There's no stream named " + streamName + " is" +
@@ -295,7 +298,6 @@ class NMRtmpConn extends EventEmitter {
         this.respondFCPublish();
         break;
       case 'publish': {
-        this.emit('publish', cmd.streamName, this.connectCmdObj.app, cmd);
         // console.log('rtmp publish stream: ' + cmd.streamName);
 
         const streamName = this.connectCmdObj.app + '/' + cmd.streamName;
@@ -314,6 +316,8 @@ class NMRtmpConn extends EventEmitter {
         this.publishStreamName = streamName;
         this.producer = this.producers[streamName];
         this.consumers = this.producer.consumers;
+
+        this.emit('publish', cmd);
         this.respondPublish();
         break;
       }
