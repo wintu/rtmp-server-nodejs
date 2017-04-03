@@ -8,6 +8,12 @@ A Node.js implementation of RTMP Server
  - Supports only RTMP protocol.
  - Supports only H.264 video and AAC audio.
  
+# Install
+
+```bash
+npm install --save rtmp-server
+```
+ 
 # Usage 
 ```js
 const RtmpServer = require('rtmp-server');
