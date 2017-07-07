@@ -48,6 +48,11 @@ rtmpServer.on('client', client => {
 rtmpServer.listen(1935);
 ```
 
+You can now publish streams to `rtmp://localhost:1935/live` and use any unique stream key.
+
+The stream will then be available at `rtmp://localhost:1935/<your stream key>`.
+
+
 # License
 
 [GPL-2.0](LICENSE)
