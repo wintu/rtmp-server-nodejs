@@ -78,12 +78,15 @@ class NMRtmpConn extends EventEmitter {
       // console.info("Send Stream EOF to publiser's consumers. Stream name " + this.publishStreamName);
       for (var id in this.consumers) {
         this.consumers[id].sendStreamEOF();
+        this.consumers[id].stop()
       }
       // console.info("Delete publiser from producers. Stream name " + this.publishStreamName);
       delete this.producers[this.publishStreamName];
+      this.socket.end()
     } else if (this.playStreamName != '') {
       if (this.producers[this.playStreamName]) {
         // console.info("Delete player from consumers. Stream name " + this.playStreamName);
+        this.socket.end()
         delete this.producers[this.playStreamName].consumers[this.id];
       }
     }
