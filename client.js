@@ -83,17 +83,17 @@ class NMRtmpConn extends EventEmitter {
       // console.info("Delete publiser from producers. Stream name " + this.publishStreamName);
       delete this.producers[this.publishStreamName];
       this.socket.end()
+      this.emit('endPublish');
     } else if (this.playStreamName != '') {
       if (this.producers[this.playStreamName]) {
         // console.info("Delete player from consumers. Stream name " + this.playStreamName);
         this.socket.end()
         delete this.producers[this.playStreamName].consumers[this.id];
       }
+      this.emit('endPlay');
     }
     // console.info("Delete client from conns. ID: " + this.id);
     delete this.conns[this.id];
-
-    this.emit('stop');
   }
 
   getRealChunkSize(rtmpBodySize, chunkSize) {

@@ -40,8 +40,12 @@ rtmpServer.on('client', client => {
     console.log('PUBLISH', streamName);
   });
   
-  client.on('stop', () => {
-    console.log('client disconnected');
+  client.on('endPublish', () => {
+    console.log('publish client disconnected');
+  });
+
+  client.on('endPlay', () => {
+    console.log('play client disconnected');
   });
 });
 
