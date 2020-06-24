@@ -82,7 +82,7 @@ class NMRtmpConn extends EventEmitter {
       }
       // console.info("Delete publiser from producers. Stream name " + this.publishStreamName);
       delete this.producers[this.publishStreamName];
-      this.socket.end()
+      this.socket.destroy()
       this.emit('endPublish');
     } else if (this.playStreamName != '') {
       if (this.producers[this.playStreamName]) {
