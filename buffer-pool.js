@@ -22,6 +22,9 @@ class BufferPool extends Readable {
     }
   }
 
+  // Fixed because an error occurred in nodejs 14 or later.
+  _read() {}
+
   read(size) {
     this.totalBufferLength -= size;
     return super.read(size);
